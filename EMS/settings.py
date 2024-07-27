@@ -13,7 +13,7 @@ SECRET_KEY = "django-insecure-+)4j*y)ljwe70hwc666mo1c$vq--ontsq#xm--i!d(7##snbx@
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+APPEND_SLASH = False
 ALLOWED_HOSTS = []
 
 
@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "organization.apps.OrganizationConfig",
     "expanse.apps.ExpanseConfig",
-    "user.apps.UserConfig",
+    'rest_framework_simplejwt',
+    'user.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -116,12 +117,12 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user.User"
 
-# REST_FRAMEWORK = {
-# #     # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-# #     "DEFAULT_AUTHENTICATION_CLASSES": (
-# #         "rest_framework_simplejwt.authentication.JWTAuthentication",
-# #     ),
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
@@ -129,7 +130,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_LIFETIME": timedelta(days=30),
     "SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER": timedelta(days=1),
     "SLIDING_TOKEN_LIFETIME_LATE_USER": timedelta(days=30),
-    "AUTH_HEADER_TYPES": ("token",),
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
 # LOGIN_URL = 'login'

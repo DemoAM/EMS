@@ -1,14 +1,10 @@
 from rest_framework import serializers
-from .models import Expanse, ExpanseCategory
+from .models import Expense, ExpenseCategory
 
 
-class ExpanseSerializer(serializers.ModelSerializer):
+class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Expanse
+        model = Expense
         fields = ["exp_category", "amount"]
-        read_only_fields = ["user"]
+        read_only_fields = ["user", "organization", "status"]
 
-    def create(self, validated_data):
-        validated_data["user"] = self.context["request"].user
-        exp = Expanse.objects.create(**validated_data)
-        return exp

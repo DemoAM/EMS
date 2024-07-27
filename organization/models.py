@@ -1,10 +1,8 @@
 from django.db import models
-from user.models import User
-
-# from user.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.contrib.auth import get_user_model
 import uuid
+
+User = get_user_model()
 
 
 class Organization(models.Model):
@@ -13,9 +11,7 @@ class Organization(models.Model):
     )
     organization_name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    address = models.CharField(
-        max_length=100,
-    )
+    address = models.CharField(max_length=100)
     no_employees = models.IntegerField()
     organization_type = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -27,7 +23,6 @@ class Organization(models.Model):
 class EmployeeProfile(models.Model):
     name = models.CharField(max_length=100)
     password = models.CharField(max_length=100, null=True, blank=True)
-
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=100)
     address = models.CharField(max_length=100)

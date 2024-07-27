@@ -31,6 +31,6 @@ urlpatterns = [
     path("", include("organization.urls")),
     path("", include("expanse.urls")),
     path("", include("rest_framework.urls")),
-    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

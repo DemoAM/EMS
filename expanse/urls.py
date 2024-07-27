@@ -1,11 +1,7 @@
-from django.urls import path, include
-from rest_framework import routers
-from .views import ExpanseViewSet
-
-router = routers.DefaultRouter()
-router.register(r"expanse", ExpanseViewSet, basename="expanse")
-
+from django.urls import path
+from .views import ExpenseAddView
 
 urlpatterns = [
-    path("api/", include(router.urls)),
-]
+    path("api/expense/", ExpenseAddView.as_view(), name="expanse")
+
+    ]
